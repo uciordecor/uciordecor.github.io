@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>uciordecor — Curated Home Finds</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f9f5f0;
+      --warm: #f0e8dc;
+      --brown: #5c3d2e;
+      --gold: #c9a84c;
+      --dark: #1a1209;
+      --text: #3b2f24;
+      --muted: #8a7060;
+      --accent: #d4572a;
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    img { max-width: 100%; height: auto; display: block; }
+    a { -webkit-tap-highlight-color: transparent; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 20px 60px;
+      overflow: hidden;
+      background: var(--dark);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      /* EDIT: replace with your own image or video */
+      background: linear-gradient(135deg, #1a0f05 0%, #3b1f0a 40%, #1a0f05 100%);
+      z-index: 0;
+    }
+
+    /* Uncomment and update src to use a background image instead:
+    .hero-bg {
+      background: url('images/hero-bg.png') center/cover no-repeat;
+    }
+    */
+
+    /* Uncomment to use a background video instead:
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0.45;
+    }
+    */
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 5, 0, 0.55);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+      width: 100%;
+      padding: 0 8px;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: clamp(0.65rem, 2vw, 0.75rem);
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 7vw, 5rem);
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      animation: fadeUp 0.8s 0.15s ease both;
+      word-break: break-word;
+    }
+
+    .hero h1 em { color: var(--gold); font-style: italic; }
+
+    .hero-copy {
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      color: rgba(255,255,255,0.75);
+      line-height: 1.75;
+      max-width: 560px;
+      margin: 0 auto 36px;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--dark);
+      font-weight: 600;
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      letter-spacing: 0.05em;
+      padding: 15px 36px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.2s;
+      animation: fadeUp 0.8s 0.45s ease both;
+      touch-action: manipulation;
+    }
+
+    .hero-cta:hover  { background: #e0b95a; transform: translateY(-2px); }
+    .hero-cta:active { transform: scale(0.97); }
+
+    /* ── PROBLEM STRIP ── */
+    .problem-strip {
+      background: var(--brown);
+      color: #fff;
+      text-align: center;
+      padding: clamp(40px, 8vw, 70px) clamp(20px, 5vw, 40px);
+    }
+
+    .problem-strip h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 4vw, 2.4rem);
+      margin-bottom: 16px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .problem-strip p {
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      color: rgba(255,255,255,0.82);
+      line-height: 1.75;
+    }
+
+    .dividers {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 28px 0 22px;
+    }
+
+    .dividers span {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    /* ── PRODUCTS SECTION ── */
+    .products-section {
+      padding: clamp(40px, 8vw, 80px) clamp(16px, 4vw, 32px);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: clamp(36px, 6vw, 64px);
+    }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      color: var(--brown);
+      margin-bottom: 10px;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      font-size: clamp(0.85rem, 2vw, 1rem);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(20px, 4vw, 40px);
+    }
+
+    /* ── PRODUCT CARD ── */
+    .product-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(60,30,10,0.07);
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(60,30,10,0.13);
+    }
+
+    /* Badge */
+    .card-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--accent);
+      color: #fff;
+      font-size: clamp(0.6rem, 1.8vw, 0.7rem);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 11px;
+      border-radius: 100px;
+      z-index: 5;
+      white-space: nowrap;
+    }
+
+    .card-badge.gold { background: var(--gold); color: var(--dark); }
+
+    /* Slider */
+    .slider-wrap {
+      position: relative;
+      aspect-ratio: 4/3;
+      background: var(--warm);
+      overflow: hidden;
+    }
+
+    .slides {
+      display: flex;
+      height: 100%;
+      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 10px;
+  background: #f9f5f0;
+  transition: transform 0.6s ease;
+}
+
+
+    .product-card:hover .slide img { transform: scale(1.03); }
+
+    .slide-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--warm);
+      color: var(--muted);
+      font-size: 0.8rem;
+      gap: 8px;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .slide-placeholder svg { opacity: 0.35; }
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.92);
+      border: none;
+      border-radius: 50%;
+      width: 36px; height: 36px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+      transition: background 0.2s, transform 0.2s;
+      touch-action: manipulation;
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    .slider-btn:hover  { background: #fff; transform: translateY(-50%) scale(1.1); }
+    .slider-btn:active { transform: translateY(-50%) scale(0.95); }
+    .slider-btn.prev { left: 10px; }
+    .slider-btn.next { right: 10px; }
+
+    .slider-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 10;
+    }
+
+    .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      border: none;
+      touch-action: manipulation;
+      padding: 0;
+    }
+
+    .dot.active { background: #fff; transform: scale(1.3); }
+
+    /* Card Body */
+    .card-body {
+      padding: clamp(16px, 3vw, 28px);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.3;
+      margin-bottom: 8px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .card-price {
+      font-size: clamp(0.78rem, 2vw, 0.9rem);
+      font-weight: 600;
+      color: var(--gold);
+      background: #fdf6e7;
+      border: 1px solid #e8d49a;
+      border-radius: 100px;
+      padding: 4px 12px;
+      white-space: nowrap;
+      align-self: flex-start;
+    }
+
+    .card-desc {
+      font-size: clamp(0.82rem, 2vw, 0.93rem);
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .benefits {
+      list-style: none;
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .benefits li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: clamp(0.8rem, 2vw, 0.88rem);
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    .benefits li::before {
+      content: '';
+      width: 18px; height: 18px;
+      min-width: 18px;
+      border-radius: 50%;
+      background: #edf7ee;
+      border: 1.5px solid #4caf50;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M2 5l2.5 2.5L8 3' stroke='%234caf50' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      margin-top: 2px;
+    }
+
+    .why-tag {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      font-size: clamp(0.68rem, 1.8vw, 0.75rem);
+      font-weight: 500;
+      padding: 5px 11px;
+      border-radius: 100px;
+      background: var(--warm);
+      color: var(--brown);
+      border: 1px solid #ddd0c0;
+    }
+
+    .card-actions { margin-top: auto; }
+
+    .btn-shop {
+      display: block;
+      text-align: center;
+      width: 100%;
+      padding: clamp(13px, 3vw, 16px);
+      border-radius: 100px;
+      background: var(--brown);
+      color: #fff;
+      text-decoration: none;
+      font-size: clamp(0.85rem, 2.2vw, 0.92rem);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      transition: background 0.25s, transform 0.2s;
+      touch-action: manipulation;
+    }
+
+    .btn-shop:hover  { background: var(--accent); transform: scale(1.02); }
+    .btn-shop:active { transform: scale(0.98); }
+
+    .affiliate-note {
+      text-align: center;
+      font-size: 0.7rem;
+      color: #bbb;
+      margin-top: 8px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: clamp(30px, 6vw, 50px) 20px;
+      font-size: clamp(0.75rem, 2vw, 0.82rem);
+      line-height: 1.9;
+    }
+
+    footer strong { color: var(--gold); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ════════════════════════════════════
+       RESPONSIVE BREAKPOINTS
+       ════════════════════════════════════ */
+
+    /* ── Large Desktop (1200px+) ── */
+    @media (min-width: 1200px) {
+      .products-grid { gap: 40px; }
+      .card-body { padding: 28px 28px 32px; }
+    }
+
+    /* ── Tablet landscape / small desktop (900px–1199px) ── */
+    @media (max-width: 1199px) and (min-width: 901px) {
+      .products-section { padding: 60px 28px; }
+      .card-body { padding: 22px; }
+    }
+
+    /* ── Tablet portrait (601px–900px) ── */
+    @media (max-width: 900px) and (min-width: 601px) {
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+      .products-section { padding: 48px 20px; }
+      .card-body { padding: 18px; }
+      .hero { padding: 70px 20px 50px; }
+      .problem-strip { padding: 48px 24px; }
+      /* Last card (product 5) — keep centered */
+      .product-card[style*="grid-column"] {
+        max-width: 520px !important;
+      }
+    }
+
+    /* ── Mobile (max 600px) ── */
+    @media (max-width: 600px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .products-section { padding: 36px 14px; }
+      .section-header { margin-bottom: 28px; }
+      .hero { padding: 60px 16px 48px; min-height: 100svh; }
+      .hero-copy { font-size: 0.92rem; }
+      .hero-cta { padding: 14px 28px; width: 100%; max-width: 300px; display: block; margin: 0 auto; }
+      .problem-strip { padding: 40px 18px; }
+      .card-body { padding: 16px 14px 20px; }
+      .card-meta { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .card-price { align-self: flex-start; }
+      /* Slider arrows — bigger tap target on mobile */
+      .slider-btn { width: 34px; height: 34px; font-size: 1rem; }
+      .slider-btn.prev { left: 8px; }
+      .slider-btn.next { right: 8px; }
+      /* Dots — bigger tap target */
+      .dot { width: 9px; height: 9px; }
+      /* Product 5 full width on mobile */
+      .product-card[style*="grid-column"] {
+        grid-column: 1 / -1 !important;
+        max-width: 100% !important;
+      }
+      footer { padding: 28px 16px; }
+    }
+
+    /* ── Very small phones (max 380px) ── */
+    @media (max-width: 380px) {
+      .hero h1 { font-size: 1.8rem; }
+      .card-name { font-size: 1rem; }
+      .btn-shop { font-size: 0.82rem; padding: 12px; }
+      .benefits li { font-size: 0.78rem; }
+      .tag { font-size: 0.65rem; }
+      .card-badge { font-size: 0.58rem; padding: 4px 9px; }
+    }
+
+    /* ── Reduce motion for accessibility ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ── Touch devices: disable hover card lift ── */
+    @media (hover: none) {
+      .product-card:hover { transform: none; box-shadow: 0 4px 24px rgba(60,30,10,0.07); }
+      .product-card:hover .slide img { transform: none; }
+      .btn-shop:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <!--
+    OPTION A — Background Image:
+    Add this inside .hero-bg using CSS:  background: url('images/hero-bg.png') center/cover;
+
+    OPTION B — Background Video:
+    Uncomment the tag below and update the src:
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="videos/hero.mp4" type="video/mp4">
+    </video>
+  -->
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.6rem);font-weight:700;color:#fff;letter-spacing:0.04em;margin-bottom:24px;animation:fadeUp 0.8s ease both;">
+  <span style="color:#c9a84c;font-style:italic;">u</span>ciordecor
+</div>
+<span class="hero-eyebrow">✦ Curated Home Finds</span>
+    <h1>Your Home Deserves to Look<br><em>Truly Beautiful</em></h1>
+    <p class="hero-copy">
+      Most people scroll past amazing home products every day — not knowing they exist or where to find them. We've done the searching so you don't have to. Every product here is hand-picked, affordable, and guaranteed to transform your space.
+    </p>
+    <a href="#products" class="hero-cta">Shop the Collection →</a>
+  </div>
+</section>
+
+<!-- ══════════════ PROBLEM STRIP ══════════════ -->
+<section class="problem-strip">
+  <h2>Tired of a Home That Doesn't Feel Like <em>You</em>?</h2>
+  <div class="dividers"><span></span><span></span><span></span></div>
+  <p>
+    Interior design shouldn't cost a fortune or require a renovation. With the right products — lighting, mirrors, shelves, statement pieces — you can completely transform how your home looks and feels, for less than you'd spend on takeout. These are the finds that actually work.
+  </p>
+</section>
+
+<!-- ══════════════ PRODUCTS ══════════════ -->
+<section class="products-section" id="products">
+  <div class="section-header">
+    <h2>This Week's Top Picks</h2>
+    <p>5 products. Real results. Ships fast.</p>
+  </div>
+
+  <div class="products-grid">
+
+    <!-- ── PRODUCT 1: Sunset Lamp ── -->
+    <article class="product-card reveal">
+      <div class="slider-wrap">
+        <span class="card-badge">Viral Pick</span>
+        <div class="slides" id="slides-1">
+          <!--
+            IMAGES FOR PRODUCT 1:
+            Replace these src values with your image paths, e.g.:
+            src="images/sunset-lamp-1.png"
+            src="images/sunset-lamp-2.png"
+            src="images/sunset-lamp-3.png"
+          -->
+            <div class="slide">
+            <img src="images/sunset-lamp-1.png" alt="Sunset Projection Lamp">
+            </div>
+
+            <div class="slide">
+            <img src="images/sunset-lamp-2.png" alt="Sunset Projection Lamp">
+            </div>
+
+            <div class="slide">
+            <img src="images/sunset-lamp-3.png" alt="Sunset Projection Lamp">
+            </div>
+        </div>
+        <button class="slider-btn prev" onclick="slide('slides-1', -1)">&#8249;</button>
+        <button class="slider-btn next" onclick="slide('slides-1', 1)">&#8250;</button>
+        <div class="slider-dots" id="dots-1">
+          <button class="dot active" onclick="goTo('slides-1', 0)"></button>
+          <button class="dot" onclick="goTo('slides-1', 1)"></button>
+          <button class="dot" onclick="goTo('slides-1', 2)"></button>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="card-meta">
+          <h3 class="card-name">Sunset Projection Lamp<br><small style="font-size:0.8rem;font-weight:400;font-family:'DM Sans',sans-serif;color:var(--muted)">Aesthetic LED Room Light</small></h3>
+          <span class="card-price">$13 – $20</span>
+        </div>
+        <p class="card-desc">Transform your room instantly with this viral sunset projection lamp that creates a warm, relaxing, and aesthetic atmosphere — beloved by creators and interior lovers alike.</p>
+        <ul class="benefits">
+          <li>Creates stunning sunset lighting effect</li>
+          <li>App control with multiple color modes</li>
+          <li>Music sync for mood and parties</li>
+          <li>360° adjustable projection angle</li>
+          <li>Perfect for bedrooms, content creation & decor</li>
+        </ul>
+        <div class="why-tag">
+          <span class="tag">Viral on TikTok & Pinterest</span>
+          <span class="tag">Affordable room transformation</span>
+        </div>
+        <div class="card-actions">
+          <!-- AFFILIATE LINK 1 — already embedded -->
+          <a href="https://amzn.to/4bAldug" target="_blank" rel="noopener sponsored" class="btn-shop">
+            🛒 Shop on Amazon
+          </a>
+          <p class="affiliate-note">*Affiliate link — we may earn a small commission at no extra cost to you.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── PRODUCT 2: Wall Panels ── -->
+    <article class="product-card reveal">
+      <div class="slider-wrap">
+        <span class="card-badge">DIY Favourite</span>
+        <div class="slides" id="slides-2">
+          <div class="slide"><img src="images/wall-panels-1.png" alt="3D Wall Panels"></div>
+          <div class="slide"><img src="images/wall-panels-2.png" alt="3D Wall Panels"></div>
+          <div class="slide"><img src="images/wall-panels-3.png" alt="3D Wall Panels"></div>     
+        </div>
+        <button class="slider-btn prev" onclick="slide('slides-2', -1)">&#8249;</button>
+        <button class="slider-btn next" onclick="slide('slides-2', 1)">&#8250;</button>
+        <div class="slider-dots" id="dots-2">
+          <button class="dot active" onclick="goTo('slides-2', 0)"></button>
+          <button class="dot" onclick="goTo('slides-2', 1)"></button>
+          <button class="dot" onclick="goTo('slides-2', 2)"></button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <h3 class="card-name">3D Peel-and-Stick<br>Wood Wall Panels</h3>
+          <span class="card-price">$32 – $35</span>
+        </div>
+        <p class="card-desc">Upgrade your walls in minutes with these easy-to-install 3D panels that give a luxury wood finish without the renovation cost — perfect for renters.</p>
+        <ul class="benefits">
+          <li>No tools needed — fully DIY-friendly</li>
+          <li>Realistic wood texture finish</li>
+          <li>Adds depth and modern style</li>
+          <li>Scratch-resistant and durable</li>
+          <li>Works on walls, ceilings & furniture</li>
+        </ul>
+        <div class="why-tag">
+          <span class="tag">Instant transformation</span>
+          <span class="tag">Budget luxury look</span>
+          <span class="tag">Renter-friendly</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://amzn.to/4t6VXD7" target="_blank" rel="noopener sponsored" class="btn-shop">
+            🛒 Shop on Amazon
+          </a>
+          <p class="affiliate-note">*Affiliate link — we may earn a small commission at no extra cost to you.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── PRODUCT 3: LED Mirror ── -->
+    <article class="product-card reveal">
+      <div class="slider-wrap">
+        <span class="card-badge">Top Seller</span>
+        <div class="slides" id="slides-3">
+          <div class="slide"><img src="images/led-mirror-1.png" alt="LED Bathroom Mirror"></div>
+          <div class="slide"><img src="images/led-mirror-2.png" alt="LED Bathroom Mirror"></div>
+          <div class="slide"><img src="images/led-mirror-3.png" alt="LED Bathroom Mirror"></div>
+        </div>
+        <button class="slider-btn prev" onclick="slide('slides-3', -1)">&#8249;</button>
+        <button class="slider-btn next" onclick="slide('slides-3', 1)">&#8250;</button>
+        <div class="slider-dots" id="dots-3">
+          <button class="dot active" onclick="goTo('slides-3', 0)"></button>
+          <button class="dot" onclick="goTo('slides-3', 1)"></button>
+          <button class="dot" onclick="goTo('slides-3', 2)"></button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <h3 class="card-name">Smart LED Bathroom Mirror<br><small style="font-size:0.8rem;font-weight:400;font-family:'DM Sans',sans-serif;color:var(--muted)">Anti-Fog + Touch Control</small></h3>
+          <span class="card-price">$70 – $90</span>
+        </div>
+        <p class="card-desc">Upgrade your bathroom with this modern LED mirror featuring anti-fog technology and customizable lighting. A luxury hotel experience in your own home.</p>
+        <ul class="benefits">
+          <li>Dual lighting: front + backlit glow</li>
+          <li>Anti-fog system for crystal-clear reflection</li>
+          <li>Adjustable brightness & color temperature</li>
+          <li>Smart touch control panel</li>
+          <li>Durable, shatterproof glass</li>
+        </ul>
+        <div class="why-tag">
+          <span class="tag">Hotel-style feel</span>
+          <span class="tag">Makeup-perfect lighting</span>
+          <span class="tag">Daily-use upgrade</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://amzn.to/4rRjMxN" target="_blank" rel="noopener sponsored" class="btn-shop">
+            🛒 Shop on Amazon
+          </a>
+          <p class="affiliate-note">*Affiliate link — we may earn a small commission at no extra cost to you.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── PRODUCT 4: Fireplace TV Stand ── -->
+    <article class="product-card reveal">
+      <div class="slider-wrap">
+        <span class="card-badge gold">🔥 High Ticket</span>
+        <div class="slides" id="slides-4">
+          <div class="slide"><img src="images/fireplace-1.png" alt="Electric Fireplace TV Stand"></div>
+          <div class="slide"><img src="images/fireplace-2.png" alt="Electric Fireplace TV Stand"></div>
+          <div class="slide"><img src="images/fireplace-3.png" alt="Electric Fireplace TV Stand"></div>
+        </div>
+        <button class="slider-btn prev" onclick="slide('slides-4', -1)">&#8249;</button>
+        <button class="slider-btn next" onclick="slide('slides-4', 1)">&#8250;</button>
+        <div class="slider-dots" id="dots-4">
+          <button class="dot active" onclick="goTo('slides-4', 0)"></button>
+          <button class="dot" onclick="goTo('slides-4', 1)"></button>
+          <button class="dot" onclick="goTo('slides-4', 2)"></button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <h3 class="card-name">Modern Electric Fireplace<br>TV Stand (72")</h3>
+          <span class="card-price">$320 – $400</span>
+        </div>
+        <p class="card-desc">Create a warm, luxury living room with this stunning TV stand featuring a built-in electric fireplace. Combines breathtaking decor with serious function.</p>
+        <ul class="benefits">
+          <li>Built-in heater — warms up to 400 sq ft</li>
+          <li>Realistic 3D flame effect</li>
+          <li>Adjustable temperature & brightness</li>
+          <li>Large storage with adjustable shelves</li>
+          <li>Stylish modern centerpiece for any living room</li>
+        </ul>
+        <div class="why-tag">
+          <span class="tag">Decor + function combo</span>
+          <span class="tag">Instant cozy atmosphere</span>
+          <span class="tag">High-end home upgrade</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://amzn.to/4m56AUN" target="_blank" rel="noopener sponsored" class="btn-shop">
+            🛒 Shop on Amazon
+          </a>
+          <p class="affiliate-note">*Affiliate link — we may earn a small commission at no extra cost to you.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── PRODUCT 5: Floating Shelves (full-width) ── -->
+    <article class="product-card reveal" style="grid-column: 1 / -1; max-width: 680px; margin: 0 auto; width: 100%;">
+      <div class="slider-wrap">
+        <span class="card-badge">Space Saver</span>
+        <div class="slides" id="slides-5">
+         <div class="slide"><img src="images/shelves-1.png" alt="Floating Wall Shelves"></div>
+        <div class="slide"><img src="images/shelves-2.png" alt="Floating Wall Shelves"></div>
+        <div class="slide"><img src="images/shelves-3.png" alt="Floating Wall Shelves"></div>
+        </div>
+        <button class="slider-btn prev" onclick="slide('slides-5', -1)">&#8249;</button>
+        <button class="slider-btn next" onclick="slide('slides-5', 1)">&#8250;</button>
+        <div class="slider-dots" id="dots-5">
+          <button class="dot active" onclick="goTo('slides-5', 0)"></button>
+          <button class="dot" onclick="goTo('slides-5', 1)"></button>
+          <button class="dot" onclick="goTo('slides-5', 2)"></button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <h3 class="card-name">Minimalist Floating Wall Shelves<br><small style="font-size:0.8rem;font-weight:400;font-family:'DM Sans',sans-serif;color:var(--muted)">Set of 3</small></h3>
+          <span class="card-price">$29 – $40</span>
+        </div>
+        <p class="card-desc">Add style and smart storage to your space with these modern floating shelves — designed for clean, minimalist decor and built to last. Works in any room.</p>
+        <ul class="benefits">
+          <li>Strong, durable construction</li>
+          <li>Clean minimalist aesthetic</li>
+          <li>Easy to install — hardware included</li>
+          <li>Works in living room, bedroom, kitchen & more</li>
+          <li>Perfect for decor displays and everyday storage</li>
+        </ul>
+        <div class="why-tag">
+          <span class="tag">Space-saving design</span>
+          <span class="tag">Boosts room aesthetics</span>
+          <span class="tag">Great for small apartments</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://amzn.to/4sUwQ68" target="_blank" rel="noopener sponsored" class="btn-shop">
+            🛒 Shop on Amazon
+          </a>
+          <p class="affiliate-note">*Affiliate link — we may earn a small commission at no extra cost to you.</p>
+        </div>
+      </div>
+    </article>
+
+  </div><!-- /products-grid -->
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <p><strong>uciordecor</strong> &nbsp;·&nbsp; Curated finds for beautiful living</p>
+  <p style="margin-top:10px;">
+    This page contains affiliate links. When you purchase through our links, we may earn a small commission at no additional cost to you. Thank you for supporting this site.
+  </p>
+  <p style="margin-top:10px; font-size:0.72rem;">© 2025 uciordecor. All rights reserved.</p>
+</footer>
+
+<script>
+  /* ─── Slider Logic ─── */
+  const state = {};
+
+  function getSlider(id) {
+    if (!state[id]) state[id] = { current: 0, total: document.getElementById(id).children.length };
+    return state[id];
+  }
+
+  function update(id) {
+    const s = getSlider(id);
+    document.getElementById(id).style.transform = `translateX(-${s.current * 100}%)`;
+    const dots = document.getElementById('dots-' + id.split('-')[1]);
+    if (dots) {
+      [...dots.children].forEach((d, i) => d.classList.toggle('active', i === s.current));
+    }
+  }
+
+  function slide(id, dir) {
+    const s = getSlider(id);
+    s.current = (s.current + dir + s.total) % s.total;
+    update(id);
+  }
+
+  function goTo(id, idx) {
+    const s = getSlider(id);
+    s.current = idx;
+    update(id);
+  }
+
+  /* ─── Scroll Reveal ─── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
