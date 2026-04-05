@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>All Products — UCIOR DECOR</title>
+  <meta name="description" content="Shop all 20 curated home decor products. Filter by room, vibe, or budget. All on Amazon."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --w:#ffffff;--off:#faf8f5;--beige:#f0ebe3;--sand:#e0d5c8;
+      --taupe:#c8b9a8;--brown:#6b5c4c;--black:#1a1612;
+      --gray:#7a7068;--glt:#b0a898;--bdr:#e8e0d6;
+      --serif:'Cormorant Garamond',Georgia,serif;
+      --sans:'DM Sans',system-ui,sans-serif;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:var(--sans);background:var(--off);color:var(--black);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    img{max-width:100%;height:auto;display:block}
+    a{text-decoration:none;-webkit-tap-highlight-color:transparent;color:inherit}
+
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:900;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 6%;background:rgba(255,255,255,.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(232,224,214,.8);transition:box-shadow .3s}
+    .nav.scrolled{box-shadow:0 2px 24px rgba(0,0,0,.08)}
+    .nav-brand{font-family:var(--serif);font-size:1.3rem;font-weight:600;letter-spacing:.04em}
+    .nav-brand span{font-style:italic;font-weight:400}
+    .nav-back{font-size:.7rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gray);padding:7px 16px;border:1px solid var(--bdr);border-radius:100px;transition:all .2s;display:flex;align-items:center;gap:5px}
+    .nav-back:hover{border-color:var(--black);color:var(--black)}
+
+    /* PAGE HEADER */
+    .ph{background:var(--black);padding:90px 6% 44px}
+    .ph-inner{max-width:1200px;margin:0 auto}
+    .ph-eyebrow{font-size:.64rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--taupe);margin-bottom:12px}
+    .ph h1{font-family:var(--serif);font-size:clamp(2rem,5vw,3.4rem);font-weight:500;color:var(--w);line-height:1.12;letter-spacing:-.01em;margin-bottom:8px}
+    .ph h1 em{font-style:italic;font-weight:400;color:rgba(255,255,255,.5)}
+    .ph p{font-size:.84rem;color:rgba(255,255,255,.38);font-weight:300}
+
+    /* FEATURED PRODUCT — TOP OF PAGE */
+    .prod-feat{background:var(--beige);border-bottom:1px solid var(--bdr)}
+    .prod-feat-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;min-height:520px}
+    .pf-img{position:relative;overflow:hidden;background:var(--sand)}
+    .pf-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+    .pf-img:hover img{transform:scale(1.04)}
+    .pf-badge{position:absolute;top:20px;left:20px;background:#c0392b;color:var(--w);font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px;border-radius:100px;z-index:2}
+    .pf-content{display:flex;flex-direction:column;justify-content:center;padding:60px 7% 60px 8%}
+    .pf-eyebrow{font-size:.64rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--brown);margin-bottom:14px}
+    .pf-content h2{font-family:var(--serif);font-size:clamp(2rem,3.5vw,3.2rem);font-weight:500;line-height:1.1;letter-spacing:-.01em;color:var(--black);margin-bottom:12px}
+    .pf-content h2 em{font-style:italic;font-weight:400;color:var(--brown)}
+    .pf-content p{font-size:.88rem;color:var(--gray);line-height:1.8;margin-bottom:8px;font-weight:300;max-width:340px}
+    .pf-social{font-size:.73rem;color:var(--brown);font-weight:500;margin-bottom:22px}
+    .pf-price-row{display:flex;align-items:baseline;gap:12px;margin-bottom:26px}
+    .pf-price{font-family:var(--serif);font-size:1.9rem;font-weight:600;color:var(--black)}
+    .pf-was{font-size:.78rem;color:var(--glt);text-decoration:line-through}
+    .pf-save{font-size:.66rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#c0392b;background:rgba(192,57,43,.1);padding:3px 8px;border-radius:4px}
+    .btn-feat{font-size:.76rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--w);background:var(--black);padding:16px 40px;border-radius:100px;display:inline-flex;align-items:center;gap:10px;transition:all .28s;margin-bottom:14px}
+    .btn-feat:hover{background:var(--brown);transform:translateY(-2px);box-shadow:0 10px 32px rgba(107,92,76,.35)}
+    .scarcity{font-size:.68rem;color:var(--gray);display:flex;align-items:center;gap:6px}
+    .scarcity::before{content:"";width:6px;height:6px;background:#e74c3c;border-radius:50%;animation:pulse 1.5s infinite}
+
+    /* FILTER BAR */
+    .fbar{position:sticky;top:60px;z-index:200;background:var(--w);border-bottom:1px solid var(--bdr);padding:0 6%}
+    .fbar-inner{max-width:1200px;margin:0 auto;overflow-x:auto;scrollbar-width:none}
+    .fbar-inner::-webkit-scrollbar{display:none}
+    .ftabs{display:flex;gap:6px;padding:11px 0;min-width:max-content}
+    .fchip{font-family:var(--sans);font-size:.7rem;font-weight:500;color:var(--gray);background:var(--off);border:1.5px solid var(--bdr);padding:7px 15px;border-radius:100px;cursor:pointer;transition:all .18s;white-space:nowrap;display:inline-flex;align-items:center;gap:4px;appearance:none}
+    .fchip:hover{color:var(--black);border-color:var(--sand);background:var(--beige)}
+    .fchip.on{color:var(--w);background:var(--black);border-color:var(--black)}
+    .fdiv{width:1px;height:20px;background:var(--bdr);align-self:center;flex-shrink:0;margin:0 4px}
+
+    /* PRODUCTS */
+    #products{padding:52px 6% 100px}
+    .prod-inner{max-width:1200px;margin:0 auto}
+    .cat{margin-bottom:68px}
+    .cat-head{display:flex;align-items:center;gap:18px;margin-bottom:26px}
+    .cat-title{font-family:var(--serif);font-size:1.1rem;font-weight:500;color:var(--black);white-space:nowrap}
+    .cat-line{flex:1;height:1px;background:var(--bdr)}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+
+    /* CARD */
+    .card{background:var(--w);border-radius:14px;overflow:hidden;border:1px solid var(--bdr);display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s;will-change:transform}
+    .card:hover{transform:translateY(-5px);box-shadow:0 24px 56px rgba(0,0,0,.1)}
+    .mwrap .main-img{transition:transform .4s ease,opacity .18s ease}
+    .thumbs .thumb{flex:0 0 calc(20% - 4px);min-width:28px;aspect-ratio:1/1;object-fit:cover;border-radius:5px;cursor:pointer;border:2px solid transparent;opacity:.55;transition:opacity .15s,border-color .15s}
+    .thumbs .thumb.active{border-color:var(--black);opacity:1}
+    .thumbs .thumb:hover{opacity:.85}
+    .card-imgs{position:relative;background:var(--beige);padding:12px 12px 0;flex-shrink:0}
+    .badge{position:absolute;top:10px;left:10px;z-index:2;font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:100px}
+    .b-blk{background:var(--black);color:var(--w)}
+    .b-brn{background:var(--brown);color:var(--w)}
+    .b-red{background:#c0392b;color:var(--w)}
+    .b-grn{background:#27ae60;color:var(--w)}
+    .b-wht{background:var(--w);color:var(--black)}
+    .b-lux{background:#6b4fa0;color:var(--w)}
+    .mwrap{width:100%;aspect-ratio:1/1;overflow:hidden;border-radius:7px;background:var(--sand)}
+    .mwrap img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+    .mwrap:hover img{transform:scale(1.05)}
+    .thumbs{display:flex;gap:4px;padding:6px 0 10px;overflow-x:auto;scrollbar-width:none}
+    .thumbs::-webkit-scrollbar{display:none}
+    /* thumbs handled above */
+    /* thumbs handled above */
+    .cbody{padding:14px 14px 12px;flex:1;display:flex;flex-direction:column}
+    .ccap{font-size:.66rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--brown);margin-bottom:5px}
+    .cname{font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--black);line-height:1.3;margin-bottom:5px}
+    .crat{display:flex;align-items:center;gap:4px;margin-bottom:7px}
+    .cstar{color:#d4a843;font-size:.67rem}
+    .crev{font-size:.62rem;color:var(--glt)}
+    .cdesc{font-size:.73rem;color:var(--gray);line-height:1.6;font-weight:300;margin-bottom:8px}
+    .cfeat{list-style:none;margin-bottom:9px;flex-grow:1}
+    .cfeat li{font-size:.68rem;color:var(--black);padding:2px 0;display:flex;align-items:flex-start;gap:5px;line-height:1.4}
+    .cfeat li::before{content:"✔";color:var(--brown);font-size:.6rem;flex-shrink:0;margin-top:2px}
+    .ctrig{font-size:.62rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#c0392b;margin-bottom:10px;display:flex;align-items:center;gap:4px}
+    .ctrig::before{content:"";width:5px;height:5px;background:#e74c3c;border-radius:50%}
+    .cfoot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:7px;padding-top:10px;border-top:1px solid var(--bdr);flex-wrap:nowrap}
+    .cprice{font-family:var(--serif);font-size:.95rem;font-weight:600;color:var(--black);flex-shrink:0;white-space:nowrap}
+    .cbtn{display:inline-flex;align-items:center;font-size:.63rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--w);background:#E8820C;padding:8px 12px;border-radius:7px;transition:background .2s;white-space:nowrap;flex-shrink:0}
+    .cbtn:hover{background:#c4690a}
+
+    /* FLOAT + FOOTER */
+    .float-btn{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:800;background:var(--black);color:var(--w);font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:13px 32px;border-radius:100px;box-shadow:0 8px 32px rgba(0,0,0,.3);transition:all .25s;white-space:nowrap;display:flex;align-items:center;gap:8px;border:1.5px solid rgba(255,255,255,.1)}
+    .float-btn:hover{background:var(--brown);transform:translateX(-50%) translateY(-3px)}
+    .float-btn.hidden{opacity:0;pointer-events:none;transform:translateX(-50%) translateY(12px)}
+    .fpulse{width:6px;height:6px;background:#e74c3c;border-radius:50%;animation:pulse 1.5s infinite;flex-shrink:0}
+    .back-bar{background:var(--black);padding:26px 6%;text-align:center}
+    .back-bar a{display:inline-flex;align-items:center;gap:7px;font-size:.75rem;font-weight:500;color:rgba(255,255,255,.45);transition:color .2s}
+    .back-bar a:hover{color:var(--w)}
+    footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);padding:22px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+    .flogo{font-family:var(--serif);font-size:.95rem;font-weight:500;color:rgba(255,255,255,.38)}
+    .flogo span{font-style:italic;font-weight:400}
+    .fdisc{font-size:.63rem;color:rgba(255,255,255,.25);line-height:1.6;max-width:540px}
+    .fdisc strong{color:rgba(255,255,255,.38);font-weight:500}
+
+    /* ANIMATE */
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+    .rev{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+    .rev.in{opacity:1;transform:translateY(0)}
+    .d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+
+    @media(max-width:1024px){.grid{grid-template-columns:repeat(2,1fr)}.prod-feat-inner{grid-template-columns:1fr}.pf-img{min-height:360px}}
+    @media(max-width:640px){.nav{padding:0 5%}#products{padding:28px 5% 70px}.grid{grid-template-columns:1fr}.fbar{padding:0 5%}footer{flex-direction:column;text-align:center}.float-btn{bottom:14px;padding:11px 24px}}
+  </style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-brand">UCIOR <span>Decor</span></a>
+  <a href="index.html" class="nav-back">
+    <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M12 7H2M7 2L2 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Back
+  </a>
+</nav>
+
+<div class="ph">
+  <div class="ph-inner">
+    <p class="ph-eyebrow">Complete Collection</p>
+    <h1>All <em>Decor</em> Products</h1>
+    <p>20 hand-curated picks · All on Amazon · Updated regularly</p>
+  </div>
+</div>
+
+<!-- FEATURED PRODUCT TOP -->
+<div class="prod-feat">
+  <div class="prod-feat-inner">
+    <div class="pf-img rev">
+      <span class="pf-badge">🔥 #1 Most Clicked</span>
+      <img src="images/sunset-led-projection-lamp-1.jpg" alt="Sunset LED Projection Lamp" onerror="this.parentElement.style.background='#d4c8b8'"/>
+    </div>
+    <div class="pf-content rev d1">
+      <p class="pf-eyebrow">This Week's Viral Find</p>
+      <h2>"This <em>Changed</em> My Entire Room"</h2>
+      <p>One small upgrade. Massive difference. The sunset lamp that went TikTok viral — transforms any room into a cinematic golden-hour dream in seconds.</p>
+      <p class="pf-social">★★★★★ &nbsp;2,300+ verified buyers · "I bought 3 of these"</p>
+      <div class="pf-price-row">
+        <span class="pf-price">$13+</span>
+        <span class="pf-was">$40+ elsewhere</span>
+        <span class="pf-save">Save 65%</span>
+      </div>
+      <a href="https://amzn.to/4bAldug" class="btn-feat" target="_blank" rel="nofollow sponsored">
+        See Why Everyone Buys This
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <p class="scarcity">&nbsp;47 people viewed this today</p>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="fbar">
+  <div class="fbar-inner">
+    <div class="ftabs">
+      <button class="fchip on" onclick="fcat(this,'all')">✦ All</button>
+      <div class="fdiv"></div>
+      <button class="fchip" onclick="fcat(this,'lighting')">💡 Lighting</button>
+      <button class="fchip" onclick="fcat(this,'wall')">🖼 Wall Decor</button>
+      <button class="fchip" onclick="fcat(this,'mirrors')">🪞 Mirrors</button>
+      <button class="fchip" onclick="fcat(this,'furniture')">🛋 Furniture</button>
+      <button class="fchip" onclick="fcat(this,'bedroom')">🛏 Bedroom</button>
+      <button class="fchip" onclick="fcat(this,'statement')">✨ Statement</button>
+      <button class="fchip" onclick="fcat(this,'smart')">📱 Smart</button>
+      <button class="fchip" onclick="fcat(this,'rugs')">🏡 Rugs</button>
+      <div class="fdiv"></div>
+      <button class="fchip" onclick="fbudget(this,25)">Under $25</button>
+      <button class="fchip" onclick="fbudget(this,50)">Under $50</button>
+      <button class="fchip" onclick="fbudget(this,100)">Under $100</button>
+    </div>
+  </div>
+</div>
+
+<section id="products">
+  <div class="prod-inner">
+  <div class="products-inner">
+
+    <!-- ═══ AMBIENT LIGHTING ═══ -->
+    <div class="cat rev" data-cat="lighting">
+      <div class="cat-head">
+        <span class="cat-title">💡 Ambient Lighting</span>
+        <div class="cat-line"></div>
+      </div>
+      <div class="grid">
+
+        <!-- 1: Sunset LED Projection Lamp -->
+        <div class="card rev">
+          <div class="card-imgs">
+            <span class="badge badge-viral">🔥 TikTok Viral</span>
+            <span class="badge b-red">🔥 Viral</span>
+            <span class="badge b-brn">✦ Renter Fave</span>
+            <span class="badge b-lux">✦ Spa Luxury</span>
+            <span class="badge b-brn">✦ Statement Piece</span>
+            <span class="badge b-grn">✦ 3,000 Reviews</span>
+            <span class="badge b-blk">✦ Designer Look</span>
+            <span class="badge b-blk">📱 Smart Home</span>
+            <span class="badge b-brn">✦ Luxury Look</span>
+            <span class="badge b-blk">✦ Gallery Wall</span>
+            <span class="badge b-lux">✦ Hotel Look</span>
+            <span class="badge b-brn">✦ Crystal Luxe</span>
+            <span class="badge b-grn">✦ Cozy Essential</span>
+            <span class="badge b-red">🔥 Viral</span>
+            <span class="badge b-blk">✦ Modern Living</span>
+            <span class="badge b-brn">✦ Aesthetic Pick</span>
+            <span class="badge b-grn">✦ Top Seller</span>
+            <span class="badge b-blk">✦ WFH Upgrade</span>
+            <span class="badge b-brn">✦ Studio Essential</span>
+            <span class="badge b-blk">✦ Only $25</span>
+            <span class="badge b-brn">✦ Room Anchor</span>
+            <div class="mwrap">
+              <img class="main-img" src="images/sunset-led-projection-lamp-1.jpg" alt="Sunset LED Projection Lamp" id="main-1" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/I/61tGXqVAW7L._AC_SL1500_.jpg'"/>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="images/sunset-led-projection-lamp-1.jpg" data-src="images/sunset-led-projection-lamp-1.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61tGXqVAW7L._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/sunset-led-projection-lamp-2.jpg" data-src="images/sunset-led-projection-lamp-2.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71tVKm5xvKL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/sunset-led-projection-lamp-3.jpg" data-src="images/sunset-led-projection-lamp-3.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71KnaCJAKYL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/sunset-led-projection-lamp-4.jpg" data-src="images/sunset-led-projection-lamp-4.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61tGXqVAW7L._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/sunset-led-projection-lamp-5.jpg" data-src="images/sunset-led-projection-lamp-5.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61tGXqVAW7L._AC_SL1500_.jpg'"/>
+            </div>
+          </div>
+          <div class="cbody">
+            <h3 class="cname">Sunset LED Projection Lamp</h3>
+            <div class="crat"><span class="cstar">★★★★★</span><span class="crev">4.7/5 · 2,300+ reviews</span></div>
+            <p class="cdesc">Transform any room into a cozy, aesthetic space with this viral sunset projection lamp. Adjustable RGB colors, music‑sync mode, and 360° rotation for cinematic bedroom lighting.</p>
+            <ul class="cfeat">
+              <li>Best for: Bedroom mood lighting & aesthetic setups</li>
+              <li>RGB with adjustable rotation and multiple color modes</li>
+              <li>Viral TikTok sunset glow, easy to stage for photos</li>
+            </ul>
+            <div class="cfoot">
+              <span class="cprice">$13+</span>
+              <a href="https://amzn.to/4bAldug" class="cbtn" target="_blank" rel="nofollow sponsored">Steal This Look</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7: Smart RGB LED Floor Lamp -->
+        <div class="card rev">
+          <div class="card-imgs">
+            <span class="badge badge-smart">📱 Smart Home</span>
+            <div class="mwrap">
+              <img class="main-img" src="images/smart-rgb-led-floor-lamp-1.jpg" alt="Smart RGB LED Floor Lamp" id="main-7" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/I/61TluPqLQwL._AC_SL1500_.jpg'"/>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="images/smart-rgb-led-floor-lamp-1.jpg" data-src="images/smart-rgb-led-floor-lamp-1.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61TluPqLQwL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/smart-rgb-led-floor-lamp-2.jpg" data-src="images/smart-rgb-led-floor-lamp-2.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71Q8bZd9YFL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/smart-rgb-led-floor-lamp-3.jpg" data-src="images/smart-rgb-led-floor-lamp-3.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61o5y0PbVRL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/smart-rgb-led-floor-lamp-4.jpg" data-src="images/smart-rgb-led-floor-lamp-4.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61TluPqLQwL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/smart-rgb-led-floor-lamp-5.jpg" data-src="images/smart-rgb-led-floor-lamp-5.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61TluPqLQwL._AC_SL1500_.jpg'"/>
+            </div>
+          </div>
+          <div class="cbody">
+            <h3 class="cname">Smart RGB LED Floor Lamp</h3>
+            <div class="crat"><span class="cstar">★★★★★</span><span class="crev">4.6/5 · 2,500+ reviews</span></div>
+            <p class="cdesc">Create dynamic ambient lighting with this smart RGB floor lamp. Displays millions of colors and syncs to music via app or voice control.</p>
+            <ul class="cfeat">
+              <li>Best for: Gaming rooms, aesthetic bedrooms, chill-out spaces</li>
+              <li>Up to 16 million RGB colors</li>
+              <li>App and voice control + music‑sync modes</li>
+            </ul>
+            <div class="cfoot">
+              <span class="cprice">$65+</span>
+              <a href="https://amzn.to/4bUQbgX" class="cbtn" target="_blank" rel="nofollow sponsored">Steal This Look</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 17: Adjustable LED Desk Lamp -->
+        <div class="card rev">
+          <div class="card-imgs">
+            <span class="badge badge-toppick">✦ Top Pick</span>
+            <div class="mwrap">
+              <img class="main-img" src="images/adjustable-led-desk-lamp-1.jpg" alt="Adjustable LED Desk Lamp" id="main-17" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/I/61h3b6IKWPL._AC_SL1500_.jpg'"/>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="images/adjustable-led-desk-lamp-1.jpg" data-src="images/adjustable-led-desk-lamp-1.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61h3b6IKWPL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/adjustable-led-desk-lamp-2.jpg" data-src="images/adjustable-led-desk-lamp-2.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71R9Y5yQFkL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/adjustable-led-desk-lamp-3.jpg" data-src="images/adjustable-led-desk-lamp-3.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61h3b6IKWPL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/adjustable-led-desk-lamp-4.jpg" data-src="images/adjustable-led-desk-lamp-4.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61h3b6IKWPL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/adjustable-led-desk-lamp-5.jpg" data-src="images/adjustable-led-desk-lamp-5.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61h3b6IKWPL._AC_SL1500_.jpg'"/>
+            </div>
+          </div>
+          <div class="cbody">
+            <h3 class="cname">Adjustable LED Desk Lamp</h3>
+            <div class="crat"><span class="cstar">★★★★★</span><span class="crev">4.6/5 · 2,700+ reviews</span></div>
+            <p class="cdesc">Boost productivity and protect your eyes with this sleek LED desk lamp. Adjustable brightness and flexible positioning for work, study, or reading.</p>
+            <ul class="cfeat">
+              <li>Best for: Work desks, study tables, and bedside reading</li>
+              <li>Adjustable arm and brightness settings</li>
+              <li>Eye-care-friendly with multiple brightness levels</li>
+            </ul>
+            <div class="cfoot">
+              <span class="cprice">$21+</span>
+              <a href="https://amzn.to/4dRjOSF" class="cbtn" target="_blank" rel="nofollow sponsored">Steal This Look</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- END AMBIENT LIGHTING -->
+
+    <!-- ═══ WALL DECOR ═══ -->
+    <div class="cat rev" data-cat="wall">
+      <div class="cat-head">
+        <span class="cat-title">🖼 Wall Decor</span>
+        <div class="cat-line"></div>
+      </div>
+      <div class="grid">
+
+        <!-- 2: Peel & Stick Wood Slat Wall Panels -->
+        <div class="card rev">
+          <div class="card-imgs">
+            <span class="badge badge-trending">✦ Renter Fave</span>
+            <div class="mwrap">
+              <img class="main-img" src="images/peel-stick-wood-slat-wall-panels-1.jpg" alt="Peel & Stick Wood Slat Wall Panels" id="main-2" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/I/81jj+KMbBXL._AC_SL1500_.jpg'"/>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="images/peel-stick-wood-slat-wall-panels-1.jpg" data-src="images/peel-stick-wood-slat-wall-panels-1.jpg" onerror="this.src='https://m.media-amazon.com/images/I/81jj+KMbBXL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/peel-stick-wood-slat-wall-panels-2.jpg" data-src="images/peel-stick-wood-slat-wall-panels-2.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71WS90FLAWL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/peel-stick-wood-slat-wall-panels-3.jpg" data-src="images/peel-stick-wood-slat-wall-panels-3.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71n-BPkKB6L._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/peel-stick-wood-slat-wall-panels-4.jpg" data-src="images/peel-stick-wood-slat-wall-panels-4.jpg" onerror="this.src='https://m.media-amazon.com/images/I/81jj+KMbBXL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/peel-stick-wood-slat-wall-panels-5.jpg" data-src="images/peel-stick-wood-slat-wall-panels-5.jpg" onerror="this.src='https://m.media-amazon.com/images/I/81jj+KMbBXL._AC_SL1500_.jpg'"/>
+            </div>
+          </div>
+          <div class="cbody">
+            <h3 class="cname">Peel & Stick Wood Slat Wall Panels</h3>
+            <div class="crat"><span class="cstar">★★★★★</span><span class="crev">4.6/5 · 1,900+ reviews</span></div>
+            <p class="cdesc">Upgrade your walls instantly with peel‑and‑stick wood slat panels that add warmth, texture, and a modern look — no drilling, no mess, no renovation required.</p>
+            <ul class="cfeat">
+              <li>Best for: Modern accent walls in small rooms or rentals</li>
+              <li>Sleek wood‑slat paneling, fast no‑drill installation</li>
+              <li>Realistic wood‑look finish</li>
+            </ul>
+            <div class="cfoot">
+              <span class="cprice">$32+</span>
+              <a href="https://amzn.to/4t6VXD7" class="cbtn" target="_blank" rel="nofollow sponsored">Check Price on Amazon</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9: Modern 5-Piece Canvas Wall Art -->
+        <div class="card rev">
+          <div class="card-imgs">
+            <span class="badge badge-seller">✦ Best Seller</span>
+            <div class="mwrap">
+              <img class="main-img" src="images/modern-5-piece-canvas-wall-art-1.jpg" alt="Modern 5-Piece Canvas Wall Art" id="main-9" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/I/81EqclqWEnL._AC_SL1500_.jpg'"/>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="images/modern-5-piece-canvas-wall-art-1.jpg" data-src="images/modern-5-piece-canvas-wall-art-1.jpg" onerror="this.src='https://m.media-amazon.com/images/I/81EqclqWEnL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/modern-5-piece-canvas-wall-art-2.jpg" data-src="images/modern-5-piece-canvas-wall-art-2.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71Tpg0UVJkL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/modern-5-piece-canvas-wall-art-3.jpg" data-src="images/modern-5-piece-canvas-wall-art-3.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61+e9M3bELL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/modern-5-piece-canvas-wall-art-4.jpg" data-src="images/modern-5-piece-canvas-wall-art-4.jpg" onerror="this.src='https://m.media-amazon.com/images/I/81EqclqWEnL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/modern-5-piece-canvas-wall-art-5.jpg" data-src="images/modern-5-piece-canvas-wall-art-5.jpg" onerror="this.src='https://m.media-amazon.com/images/I/81EqclqWEnL._AC_SL1500_.jpg'"/>
+            </div>
+          </div>
+          <div class="cbody">
+            <h3 class="cname">Modern 5‑Piece Canvas Wall Art</h3>
+            <div class="crat"><span class="cstar">★★★★★</span><span class="crev">4.7/5 · 2,600+ reviews</span></div>
+            <p class="cdesc">Turn blank walls into stylish focal points with this modern 5‑piece canvas art set. Pre‑framed and ready‑to‑hang — ideal for renters or busy homeowners.</p>
+            <ul class="cfeat">
+              <li>Best for: Living‑room accent walls or bedroom feature walls</li>
+              <li>Contemporary, abstract design — gallery‑style arrangement</li>
+              <li>Pre-framed and ready to hang</li>
+            </ul>
+            <div class="cfoot">
+              <span class="cprice">$43+</span>
+              <a href="https://amzn.to/4lT11bC" class="cbtn" target="_blank" rel="nofollow sponsored">Steal This Look</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 14: Large LED Digital Wall Clock -->
+        <div class="card rev">
+          <div class="card-imgs">
+            <span class="badge badge-new">✦ Modern Living</span>
+            <div class="mwrap">
+              <img class="main-img" src="images/large-led-digital-wall-clock-1.jpg" alt="Large LED Digital Wall Clock" id="main-14" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/I/71e2RFzepUL._AC_SL1500_.jpg'"/>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="images/large-led-digital-wall-clock-1.jpg" data-src="images/large-led-digital-wall-clock-1.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71e2RFzepUL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/large-led-digital-wall-clock-2.jpg" data-src="images/large-led-digital-wall-clock-2.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71HkrxYL8gL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/large-led-digital-wall-clock-3.jpg" data-src="images/large-led-digital-wall-clock-3.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71JYi3SZ6uL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/large-led-digital-wall-clock-4.jpg" data-src="images/large-led-digital-wall-clock-4.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71e2RFzepUL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/large-led-digital-wall-clock-5.jpg" data-src="images/large-led-digital-wall-clock-5.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71e2RFzepUL._AC_SL1500_.jpg'"/>
+            </div>
+          </div>
+          <div class="cbody">
+            <h3 class="cname">Large LED Digital Wall Clock</h3>
+            <div class="crat"><span class="cstar">★★★★★</span><span class="crev">4.6/5 · 2,000+ reviews</span></div>
+            <p class="cdesc">Stay organized in style with this modern digital wall clock featuring a bright LED display, date, and temperature readout. Great for offices, hallways, or kitchens.</p>
+            <ul class="cfeat">
+              <li>Best for: Offices, living rooms, and shared spaces</li>
+              <li>Shows time, date, and room temperature</li>
+              <li>Large, easy‑to‑read display with clear numbers</li>
+            </ul>
+            <div class="cfoot">
+              <span class="cprice">$31+</span>
+              <a href="https://amzn.to/3NT2zGb" class="cbtn" target="_blank" rel="nofollow sponsored">Steal This Look</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- END WALL DECOR -->
+
+    <!-- ═══ MIRRORS ═══ -->
+    <div class="cat rev" data-cat="mirrors">
+      <div class="cat-head">
+        <span class="cat-title">🪞 Mirrors</span>
+        <div class="cat-line"></div>
+      </div>
+      <div class="grid">
+
+        <!-- 3: LED Anti-Fog Smart Bathroom Mirror -->
+        <div class="card rev">
+          <div class="card-imgs">
+            <span class="badge badge-luxury">✦ Bathroom Luxury</span>
+            <div class="mwrap">
+              <img class="main-img" src="images/led-anti-fog-smart-bathroom-mirror-1.jpg" alt="LED Anti-Fog Smart Bathroom Mirror" id="main-3" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/I/51dDAr-BPLL._AC_SL1080_.jpg'"/>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="images/led-anti-fog-smart-bathroom-mirror-1.jpg" data-src="images/led-anti-fog-smart-bathroom-mirror-1.jpg" onerror="this.src='https://m.media-amazon.com/images/I/51dDAr-BPLL._AC_SL1080_.jpg'"/>
+              <img class="thumb" src="images/led-anti-fog-smart-bathroom-mirror-2.jpg" data-src="images/led-anti-fog-smart-bathroom-mirror-2.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61-x0YZmCxL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/led-anti-fog-smart-bathroom-mirror-3.jpg" data-src="images/led-anti-fog-smart-bathroom-mirror-3.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61Q+y9l4s3L._AC_SL1080_.jpg'"/>
+              <img class="thumb" src="images/led-anti-fog-smart-bathroom-mirror-4.jpg" data-src="images/led-anti-fog-smart-bathroom-mirror-4.jpg" onerror="this.src='https://m.media-amazon.com/images/I/51dDAr-BPLL._AC_SL1080_.jpg'"/>
+              <img class="thumb" src="images/led-anti-fog-smart-bathroom-mirror-5.jpg" data-src="images/led-anti-fog-smart-bathroom-mirror-5.jpg" onerror="this.src='https://m.media-amazon.com/images/I/51dDAr-BPLL._AC_SL1080_.jpg'"/>
+            </div>
+          </div>
+          <div class="cbody">
+            <h3 class="cname">LED Anti‑Fog Smart Bathroom Mirror</h3>
+            <div class="crat"><span class="cstar">★★★★★</span><span class="crev">4.7/5 · 1,500+ reviews</span></div>
+            <p class="cdesc">Bring a spa‑like feel to your bathroom with this LED smart mirror featuring anti‑fog technology, adjustable brightness, and multiple light‑temperature modes.</p>
+            <ul class="cfeat">
+              <li>Best for: Modern bathrooms and small en‑suites</li>
+              <li>Warm, natural, and cool white lighting modes</li>
+              <li>Built‑in anti‑fog system stays clear after hot showers</li>
+            </ul>
+            <div class="cfoot">
+              <span class="cprice">$70+</span>
+              <a href="https://amzn.to/4rRjMxN" class="cbtn" target="_blank" rel="nofollow sponsored">Check Price on Amazon</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6: BEAUTYPEAK Arched Wall Mirror -->
+        <div class="card rev">
+          <div class="card-imgs">
+            <span class="badge badge-toppick">✦ Top Pick</span>
+            <div class="mwrap">
+              <img class="main-img" src="images/beautypeak-arched-wall-mirror-1.jpg" alt="BEAUTYPEAK Arched Wall Mirror" id="main-6" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/I/41vXUSX3p-L._AC_SL1000_.jpg'"/>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="images/beautypeak-arched-wall-mirror-1.jpg" data-src="images/beautypeak-arched-wall-mirror-1.jpg" onerror="this.src='https://m.media-amazon.com/images/I/41vXUSX3p-L._AC_SL1000_.jpg'"/>
+              <img class="thumb" src="images/beautypeak-arched-wall-mirror-2.jpg" data-src="images/beautypeak-arched-wall-mirror-2.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61Gu6A6SUVL._AC_SL1000_.jpg'"/>
+              <img class="thumb" src="images/beautypeak-arched-wall-mirror-3.jpg" data-src="images/beautypeak-arched-wall-mirror-3.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61Fqz9OCPKL._AC_SL1000_.jpg'"/>
+              <img class="thumb" src="images/beautypeak-arched-wall-mirror-4.jpg" data-src="images/beautypeak-arched-wall-mirror-4.jpg" onerror="this.src='https://m.media-amazon.com/images/I/41vXUSX3p-L._AC_SL1000_.jpg'"/>
+              <img class="thumb" src="images/beautypeak-arched-wall-mirror-5.jpg" data-src="images/beautypeak-arched-wall-mirror-5.jpg" onerror="this.src='https://m.media-amazon.com/images/I/41vXUSX3p-L._AC_SL1000_.jpg'"/>
+            </div>
+          </div>
+          <div class="cbody">
+            <h3 class="cname">BEAUTYPEAK Arched Wall Mirror</h3>
+            <div class="crat"><span class="cstar">★★★★★</span><span class="crev">4.7/5 · 1,400+ reviews</span></div>
+            <p class="cdesc">Brighten your space and make rooms feel larger with this elegant arched wall mirror featuring a sleek modern frame and durable metal construction.</p>
+            <ul class="cfeat">
+              <li>Best for: Entryways, hallways, and bedroom decor</li>
+              <li>Modern arched shape that adds a designer‑like feel</li>
+              <li>Durable metal with a clean finish</li>
+            </ul>
+            <div class="cfoot">
+              <span class="cprice">$40+</span>
+              <a href="https://amzn.to/4bQseqW" class="cbtn" target="_blank" rel="nofollow sponsored">Check Price on Amazon</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- END MIRRORS -->
+
+    <!-- ═══ FURNITURE ═══ -->
+    <div class="cat rev" data-cat="furniture">
+      <div class="cat-head">
+        <span class="cat-title">🛋 Furniture</span>
+        <div class="cat-line"></div>
+      </div>
+      <div class="grid">
+
+        <!-- 4: Electric Fireplace TV Stand -->
+        <div class="card rev">
+          <div class="card-imgs">
+            <span class="badge badge-trending">✦ Statement Piece</span>
+            <div class="mwrap">
+              <img class="main-img" src="images/electric-fireplace-tv-stand-1.jpg" alt="Electric Fireplace TV Stand" id="main-4" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/I/71W8hVJxjNL._AC_SL1500_.jpg'"/>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="images/electric-fireplace-tv-stand-1.jpg" data-src="images/electric-fireplace-tv-stand-1.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71W8hVJxjNL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/electric-fireplace-tv-stand-2.jpg" data-src="images/electric-fireplace-tv-stand-2.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71I+h+cWqNL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/electric-fireplace-tv-stand-3.jpg" data-src="images/electric-fireplace-tv-stand-3.jpg" onerror="this.src='https://m.media-amazon.com/images/I/81V5zQFNZeL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/electric-fireplace-tv-stand-4.jpg" data-src="images/electric-fireplace-tv-stand-4.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71W8hVJxjNL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/electric-fireplace-tv-stand-5.jpg" data-src="images/electric-fireplace-tv-stand-5.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71W8hVJxjNL._AC_SL1500_.jpg'"/>
+            </div>
+          </div>
+          <div class="cbody">
+            <h3 class="cname">Electric Fireplace TV Stand</h3>
+            <div class="crat"><span class="cstar">★★★★★</span><span class="crev">4.6/5 · 2,100+ reviews</span></div>
+            <p class="cdesc">Create a cozy living‑room centerpiece with this stylish TV stand complete with realistic LED fireplace flames and optional heating. Great for apartments without a real fireplace.</p>
+            <ul class="cfeat">
+              <li>Best for: Cozy living‑room or media‑room setups</li>
+              <li>Supports most TVs up to 80‑inch</li>
+              <li>Realistic flame effect without gas or smoke</li>
+            </ul>
+            <div class="cfoot">
+              <span class="cprice">$320+</span>
+              <a href="https://amzn.to/4m56AUN" class="cbtn" target="_blank" rel="nofollow sponsored">Check Price on Amazon</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5: Rustic Floating Wall Shelves -->
+        <div class="card rev">
+          <div class="card-imgs">
+            <span class="badge badge-seller">✦ Best Seller</span>
+            <div class="mwrap">
+              <img class="main-img" src="images/rustic-floating-wall-shelves-1.jpg" alt="Rustic Floating Wall Shelves" id="main-5" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/I/71mOlbBGnQL._AC_SL1500_.jpg'"/>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="images/rustic-floating-wall-shelves-1.jpg" data-src="images/rustic-floating-wall-shelves-1.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71mOlbBGnQL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/rustic-floating-wall-shelves-2.jpg" data-src="images/rustic-floating-wall-shelves-2.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61DwDqBmhRL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/rustic-floating-wall-shelves-3.jpg" data-src="images/rustic-floating-wall-shelves-3.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71+7ByGETyL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/rustic-floating-wall-shelves-4.jpg" data-src="images/rustic-floating-wall-shelves-4.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71mOlbBGnQL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/rustic-floating-wall-shelves-5.jpg" data-src="images/rustic-floating-wall-shelves-5.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71mOlbBGnQL._AC_SL1500_.jpg'"/>
+            </div>
+          </div>
+          <div class="cbody">
+            <h3 class="cname">Rustic Floating Wall Shelves (Set of 3)</h3>
+            <div class="crat"><span class="cstar">★★★★★</span><span class="crev">4.7/5 · 3,000+ reviews</span></div>
+            <p class="cdesc">Add stylish storage and decorative display space to your walls with these rustic floating shelves. Perfect for small spaces where floor space is limited.</p>
+            <ul class="cfeat">
+              <li>Best for: Small‑space wall storage & decor accents</li>
+              <li>Rustic‑modern look suits cozy and minimalist rooms</li>
+              <li>Use for: Plants, books, photos, and small decor items</li>
+            </ul>
+            <div class="cfoot">
+              <span class="cprice">$29+</span>
+              <a href="https://amzn.to/4sUwQ68" class="cbtn" target="_blank" rel="nofollow sponsored">Steal This Look</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8: Luxury Velvet Accent Chair -->
+        <div class="card rev">
+          <div class="card-imgs">
+            <span class="badge badge-luxury">✦ Luxury Pick</span>
+            <div class="mwrap">
+              <img class="main-img" src="images/luxury-velvet-accent-chair-1.jpg" alt="Luxury Velvet Accent Chair" id="main-8" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/I/71ZO1QIIKLL._AC_SL1500_.jpg'"/>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="images/luxury-velvet-accent-chair-1.jpg" data-src="images/luxury-velvet-accent-chair-1.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71ZO1QIIKLL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/luxury-velvet-accent-chair-2.jpg" data-src="images/luxury-velvet-accent-chair-2.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71VRtVxNMUL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/luxury-velvet-accent-chair-3.jpg" data-src="images/luxury-velvet-accent-chair-3.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71hPf62MPXL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/luxury-velvet-accent-chair-4.jpg" data-src="images/luxury-velvet-accent-chair-4.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71ZO1QIIKLL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/luxury-velvet-accent-chair-5.jpg" data-src="images/luxury-velvet-accent-chair-5.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71ZO1QIIKLL._AC_SL1500_.jpg'"/>
+            </div>
+          </div>
+          <div class="cbody">
+            <h3 class="cname">Luxury Velvet Accent Chair</h3>
+            <div class="crat"><span class="cstar">★★★★★</span><span class="crev">4.6/5 · 1,700+ reviews</span></div>
+            <p class="cdesc">Upgrade your seating with this soft velvet accent chair combining comfort and modern minimalist style for reading corners or small living rooms.</p>
+            <ul class="cfeat">
+              <li>Best for: Cozy reading nooks and bedroom seating</li>
+              <li>Plush velvet fabric and sculpted frame</li>
+              <li>Modern, minimalist silhouette</li>
+            </ul>
+            <div class="cfoot">
+              <span class="cprice">$94+</span>
+              <a href="https://amzn.to/4bDhTQj" class="cbtn" target="_blank" rel="nofollow sponsored">Check Price on Amazon</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- END FURNITURE -->
+
+    <!-- ═══ BEDROOM DECOR ═══ -->
+    <div class="cat rev" data-cat="bedroom">
+      <div class="cat-head">
+        <span class="cat-title">🛏 Bedroom Decor</span>
+        <div class="cat-line"></div>
+      </div>
+      <div class="grid">
+
+        <!-- 10: Upholstered Headboard Panels -->
+        <div class="card rev">
+          <div class="card-imgs">
+            <span class="badge badge-luxury">✦ Hotel Luxe</span>
+            <div class="mwrap">
+              <img class="main-img" src="images/upholstered-wall-mounted-headboard-panels-1.jpg" alt="Upholstered Wall-Mounted Headboard Panels" id="main-10" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/I/71J1Nv47rRL._AC_SL1500_.jpg'"/>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="images/upholstered-wall-mounted-headboard-panels-1.jpg" data-src="images/upholstered-wall-mounted-headboard-panels-1.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71J1Nv47rRL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/upholstered-wall-mounted-headboard-panels-2.jpg" data-src="images/upholstered-wall-mounted-headboard-panels-2.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71vdIVSl3AL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/upholstered-wall-mounted-headboard-panels-3.jpg" data-src="images/upholstered-wall-mounted-headboard-panels-3.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71VvSYONLKL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/upholstered-wall-mounted-headboard-panels-4.jpg" data-src="images/upholstered-wall-mounted-headboard-panels-4.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71J1Nv47rRL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/upholstered-wall-mounted-headboard-panels-5.jpg" data-src="images/upholstered-wall-mounted-headboard-panels-5.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71J1Nv47rRL._AC_SL1500_.jpg'"/>
+            </div>
+          </div>
+          <div class="cbody">
+            <h3 class="cname">Upholstered Wall‑Mounted Headboard Panels</h3>
+            <div class="crat"><span class="cstar">★★★★★</span><span class="crev">4.6/5 · 1,200+ reviews</span></div>
+            <p class="cdesc">Create a luxury hotel‑style bedroom look with these upholstered headboard panels that attach directly to your wall with a peel‑and‑stick or screw‑mount system.</p>
+            <ul class="cfeat">
+              <li>Best for: Modern bedroom upgrades without buying a new bed</li>
+              <li>Soft padded fabric panels</li>
+              <li>DIY‑style headboard that looks expensive</li>
+            </ul>
+            <div class="cfoot">
+              <span class="cprice">$80+</span>
+              <a href="https://amzn.to/41AZwWe" class="cbtn" target="_blank" rel="nofollow sponsored">Check Price on Amazon</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 15: Heart-Shaped Ceramic Vase Set -->
+        <div class="card rev">
+          <div class="card-imgs">
+            <span class="badge badge-trending">✦ Aesthetic Pick</span>
+            <div class="mwrap">
+              <img class="main-img" src="images/heart-shaped-ceramic-vase-set-1.jpg" alt="Heart-Shaped Ceramic Vase Set" id="main-15" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/I/71F-wKyXt4L._AC_SL1500_.jpg'"/>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="images/heart-shaped-ceramic-vase-set-1.jpg" data-src="images/heart-shaped-ceramic-vase-set-1.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71F-wKyXt4L._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/heart-shaped-ceramic-vase-set-2.jpg" data-src="images/heart-shaped-ceramic-vase-set-2.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71b3bOKMlwL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/heart-shaped-ceramic-vase-set-3.jpg" data-src="images/heart-shaped-ceramic-vase-set-3.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61NiPDujNNL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/heart-shaped-ceramic-vase-set-4.jpg" data-src="images/heart-shaped-ceramic-vase-set-4.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71F-wKyXt4L._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/heart-shaped-ceramic-vase-set-5.jpg" data-src="images/heart-shaped-ceramic-vase-set-5.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71F-wKyXt4L._AC_SL1500_.jpg'"/>
+            </div>
+          </div>
+          <div class="cbody">
+            <h3 class="cname">Heart‑Shaped Ceramic Vase Set</h3>
+            <div class="crat"><span class="cstar">★★★★★</span><span class="crev">4.7/5 · 1,100+ reviews</span></div>
+            <p class="cdesc">Add a romantic, artistic touch to your table or shelves with this heart‑shaped ceramic vase set. Works with fresh or artificial flowers.</p>
+            <ul class="cfeat">
+              <li>Best for: Table centerpieces and gift‑style decor</li>
+              <li>Premium ceramic with smooth glaze</li>
+              <li>Unique heart‑shaped design that stands out</li>
+            </ul>
+            <div class="cfoot">
+              <span class="cprice">$27+</span>
+              <a href="https://amzn.to/4sIz0X4" class="cbtn" target="_blank" rel="nofollow sponsored">Steal This Look</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 19: Himalayan Pink Salt Lamp -->
+        <div class="card rev">
+          <div class="card-imgs">
+            <span class="badge badge-cozy">✦ Cozy Must</span>
+            <div class="mwrap">
+              <img class="main-img" src="images/himalayan-pink-salt-lamp-1.jpg" alt="Himalayan Pink Salt Lamp" id="main-19" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/I/71T5e0UdL4L._AC_SL1500_.jpg'"/>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="images/himalayan-pink-salt-lamp-1.jpg" data-src="images/himalayan-pink-salt-lamp-1.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71T5e0UdL4L._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/himalayan-pink-salt-lamp-2.jpg" data-src="images/himalayan-pink-salt-lamp-2.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61JU0WjPLXL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/himalayan-pink-salt-lamp-3.jpg" data-src="images/himalayan-pink-salt-lamp-3.jpg" onerror="this.src='https://m.media-amazon.com/images/I/81JYh+gB1eL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/himalayan-pink-salt-lamp-4.jpg" data-src="images/himalayan-pink-salt-lamp-4.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71T5e0UdL4L._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/himalayan-pink-salt-lamp-5.jpg" data-src="images/himalayan-pink-salt-lamp-5.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71T5e0UdL4L._AC_SL1500_.jpg'"/>
+            </div>
+          </div>
+          <div class="cbody">
+            <h3 class="cname">Himalayan Pink Salt Lamp</h3>
+            <div class="crat"><span class="cstar">★★★★★</span><span class="crev">4.7/5 · 2,800+ reviews</span></div>
+            <p class="cdesc">Create a warm, calming atmosphere with this natural Himalayan pink salt lamp that casts a soft amber glow gentle on the eyes.</p>
+            <ul class="cfeat">
+              <li>Best for: Relaxing bedroom lighting and meditation spaces</li>
+              <li>Natural salt crystal with subtle warm ambient glow</li>
+              <li>Warm amber‑toned light gentle on the eyes</li>
+            </ul>
+            <div class="cfoot">
+              <span class="cprice">$25+</span>
+              <a href="https://amzn.to/41BbDTb" class="cbtn" target="_blank" rel="nofollow sponsored">Steal This Look</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- END BEDROOM DECOR -->
+
+    <!-- ═══ STATEMENT LIGHTING ═══ -->
+    <div class="cat rev" data-cat="statement">
+      <div class="cat-head">
+        <span class="cat-title">✨ Statement Lighting</span>
+        <div class="cat-line"></div>
+      </div>
+      <div class="grid">
+
+        <!-- 11: Modern Crystal Globe Chandelier -->
+        <div class="card rev">
+          <div class="card-imgs">
+            <span class="badge badge-luxury">✦ Luxury Lighting</span>
+            <div class="mwrap">
+              <img class="main-img" src="images/modern-crystal-globe-chandelier-1.jpg" alt="Modern Crystal Globe Chandelier" id="main-11" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/I/71e7XnWGhIL._AC_SL1500_.jpg'"/>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="images/modern-crystal-globe-chandelier-1.jpg" data-src="images/modern-crystal-globe-chandelier-1.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71e7XnWGhIL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/modern-crystal-globe-chandelier-2.jpg" data-src="images/modern-crystal-globe-chandelier-2.jpg" onerror="this.src='https://m.media-amazon.com/images/I/81p-Qi5VZiL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/modern-crystal-globe-chandelier-3.jpg" data-src="images/modern-crystal-globe-chandelier-3.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71-cDVl9IHL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/modern-crystal-globe-chandelier-4.jpg" data-src="images/modern-crystal-globe-chandelier-4.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71e7XnWGhIL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/modern-crystal-globe-chandelier-5.jpg" data-src="images/modern-crystal-globe-chandelier-5.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71e7XnWGhIL._AC_SL1500_.jpg'"/>
+            </div>
+          </div>
+          <div class="cbody">
+            <h3 class="cname">Modern Crystal Globe Chandelier</h3>
+            <div class="crat"><span class="cstar">★★★★★</span><span class="crev">4.7/5 · 1,000+ reviews</span></div>
+            <p class="cdesc">Add elegance and sophistication to your home with this crystal globe chandelier, perfect for dining rooms, entryways, or staircases.</p>
+            <ul class="cfeat">
+              <li>Best for: Dining rooms, entry halls, and statement ceilings</li>
+              <li>Modern globe‑shaped fixture with ambient spread</li>
+              <li>Luxurious crystal‑style globe design</li>
+            </ul>
+            <div class="cfoot">
+              <span class="cprice">$250+</span>
+              <a href="https://amzn.to/3PC3Xxn" class="cbtn" target="_blank" rel="nofollow sponsored">Check Price on Amazon</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 13: Galaxy Star Projector -->
+        <div class="card rev">
+          <div class="card-imgs">
+            <span class="badge badge-viral">🔥 Most Loved</span>
+            <div class="mwrap">
+              <img class="main-img" src="images/galaxy-star-projector-bluetooth-speaker-1.jpg" alt="Galaxy Star Projector with Bluetooth Speaker" id="main-13" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/I/71I3VyPSOHL._AC_SL1500_.jpg'"/>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="images/galaxy-star-projector-bluetooth-speaker-1.jpg" data-src="images/galaxy-star-projector-bluetooth-speaker-1.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71I3VyPSOHL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/galaxy-star-projector-bluetooth-speaker-2.jpg" data-src="images/galaxy-star-projector-bluetooth-speaker-2.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71H-SkHU2hL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/galaxy-star-projector-bluetooth-speaker-3.jpg" data-src="images/galaxy-star-projector-bluetooth-speaker-3.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71jbXlFaxZL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/galaxy-star-projector-bluetooth-speaker-4.jpg" data-src="images/galaxy-star-projector-bluetooth-speaker-4.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71I3VyPSOHL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/galaxy-star-projector-bluetooth-speaker-5.jpg" data-src="images/galaxy-star-projector-bluetooth-speaker-5.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71I3VyPSOHL._AC_SL1500_.jpg'"/>
+            </div>
+          </div>
+          <div class="cbody">
+            <h3 class="cname">Galaxy Star Projector + Bluetooth Speaker</h3>
+            <div class="crat"><span class="cstar">★★★★★</span><span class="crev">4.7/5 · 3,200+ reviews</span></div>
+            <p class="cdesc">Turn your ceiling into a magical galaxy with this star projector that doubles as a Bluetooth speaker for music‑filled nights or movie‑time ambiance.</p>
+            <ul class="cfeat">
+              <li>Best for: Bedroom ambiance and movie‑watching setups</li>
+              <li>Galaxy‑style projections with multiple effects</li>
+              <li>Built‑in Bluetooth speaker</li>
+            </ul>
+            <div class="cfoot">
+              <span class="cprice">$35+</span>
+              <a href="https://amzn.to/3PuQqYz" class="cbtn" target="_blank" rel="nofollow sponsored">Steal This Look</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- END STATEMENT LIGHTING -->
+
+    <!-- ═══ SMART HOME DECOR ═══ -->
+    <div class="cat rev" data-cat="smart">
+      <div class="cat-head">
+        <span class="cat-title">📱 Smart Home Decor</span>
+        <div class="cat-line"></div>
+      </div>
+      <div class="grid">
+
+        <!-- 12: Fireplace Flame Aroma Diffuser -->
+        <div class="card rev">
+          <div class="card-imgs">
+            <span class="badge badge-cozy">✦ Cozy Essential</span>
+            <div class="mwrap">
+              <img class="main-img" src="images/fireplace-flame-aroma-diffuser-1.jpg" alt="Fireplace Flame Aroma Diffuser" id="main-12" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/I/61NVmJuD5SL._AC_SL1500_.jpg'"/>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="images/fireplace-flame-aroma-diffuser-1.jpg" data-src="images/fireplace-flame-aroma-diffuser-1.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61NVmJuD5SL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/fireplace-flame-aroma-diffuser-2.jpg" data-src="images/fireplace-flame-aroma-diffuser-2.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71k4x1QJUNL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/fireplace-flame-aroma-diffuser-3.jpg" data-src="images/fireplace-flame-aroma-diffuser-3.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61pKUe1K9nL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/fireplace-flame-aroma-diffuser-4.jpg" data-src="images/fireplace-flame-aroma-diffuser-4.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61NVmJuD5SL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/fireplace-flame-aroma-diffuser-5.jpg" data-src="images/fireplace-flame-aroma-diffuser-5.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61NVmJuD5SL._AC_SL1500_.jpg'"/>
+            </div>
+          </div>
+          <div class="cbody">
+            <h3 class="cname">Fireplace Flame Aroma Diffuser</h3>
+            <div class="crat"><span class="cstar">★★★★★</span><span class="crev">4.6/5 · 2,400+ reviews</span></div>
+            <p class="cdesc">Enjoy relaxing aromatherapy with this diffuser that includes a realistic fireplace flame effect, creating a cozy calming atmosphere anywhere in the home.</p>
+            <ul class="cfeat">
+              <li>Best for: Bedrooms, study areas, or relaxation corners</li>
+              <li>Use with: Essential oils or fragrance oils</li>
+              <li>Soft flame effect without real fire</li>
+            </ul>
+            <div class="cfoot">
+              <span class="cprice">$30+</span>
+              <a href="https://amzn.to/4sz4sa0" class="cbtn" target="_blank" rel="nofollow sponsored">Steal This Look</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 16: Artificial Olive Tree -->
+        <div class="card rev">
+          <div class="card-imgs">
+            <span class="badge badge-seller">✦ Top Seller</span>
+            <div class="mwrap">
+              <img class="main-img" src="images/artificial-olive-tree-6ft-1.jpg" alt="Artificial Olive Tree 6ft" id="main-16" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/I/41QrSAH3jnL._AC_.jpg'"/>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="images/artificial-olive-tree-6ft-1.jpg" data-src="images/artificial-olive-tree-6ft-1.jpg" onerror="this.src='https://m.media-amazon.com/images/I/41QrSAH3jnL._AC_.jpg'"/>
+              <img class="thumb" src="images/artificial-olive-tree-6ft-2.jpg" data-src="images/artificial-olive-tree-6ft-2.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61YVY7biwUL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/artificial-olive-tree-6ft-3.jpg" data-src="images/artificial-olive-tree-6ft-3.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71UQixrfqYL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/artificial-olive-tree-6ft-4.jpg" data-src="images/artificial-olive-tree-6ft-4.jpg" onerror="this.src='https://m.media-amazon.com/images/I/41QrSAH3jnL._AC_.jpg'"/>
+              <img class="thumb" src="images/artificial-olive-tree-6ft-5.jpg" data-src="images/artificial-olive-tree-6ft-5.jpg" onerror="this.src='https://m.media-amazon.com/images/I/41QrSAH3jnL._AC_.jpg'"/>
+            </div>
+          </div>
+          <div class="cbody">
+            <h3 class="cname">Artificial Olive Tree (6 ft)</h3>
+            <div class="crat"><span class="cstar">★★★★★</span><span class="crev">4.7/5 · 3,100+ reviews</span></div>
+            <p class="cdesc">Bring natural‑looking greenery into your home without the maintenance. This realistic 6‑foot artificial olive tree looks great in living rooms or hallways.</p>
+            <ul class="cfeat">
+              <li>Best for: Living‑room corners and entry‑way decor</li>
+              <li>Highly realistic leaf texture and full shape</li>
+              <li>Approximately 6 feet tall</li>
+            </ul>
+            <div class="cfoot">
+              <span class="cprice">$50+</span>
+              <a href="https://amzn.to/4cb3zPc" class="cbtn" target="_blank" rel="nofollow sponsored">Steal This Look</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 18: Adjustable Room Divider Curtain Rod -->
+        <div class="card rev">
+          <div class="card-imgs">
+            <span class="badge badge-trending">✦ Small Space Hero</span>
+            <div class="mwrap">
+              <img class="main-img" src="images/adjustable-room-divider-curtain-rod-1.jpg" alt="Adjustable Room Divider Curtain Rod" id="main-18" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/I/61kkYaBAbOL._AC_SL1500_.jpg'"/>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="images/adjustable-room-divider-curtain-rod-1.jpg" data-src="images/adjustable-room-divider-curtain-rod-1.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61kkYaBAbOL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/adjustable-room-divider-curtain-rod-2.jpg" data-src="images/adjustable-room-divider-curtain-rod-2.jpg" onerror="this.src='https://m.media-amazon.com/images/I/71rA6IhS1JL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/adjustable-room-divider-curtain-rod-3.jpg" data-src="images/adjustable-room-divider-curtain-rod-3.jpg" onerror="this.src='https://m.media-amazon.com/images/I/81XF7IUrgkL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/adjustable-room-divider-curtain-rod-4.jpg" data-src="images/adjustable-room-divider-curtain-rod-4.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61kkYaBAbOL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/adjustable-room-divider-curtain-rod-5.jpg" data-src="images/adjustable-room-divider-curtain-rod-5.jpg" onerror="this.src='https://m.media-amazon.com/images/I/61kkYaBAbOL._AC_SL1500_.jpg'"/>
+            </div>
+          </div>
+          <div class="cbody">
+            <h3 class="cname">Adjustable Room Divider Curtain Rod</h3>
+            <div class="crat"><span class="cstar">★★★★★</span><span class="crev">4.6/5 · 1,600+ reviews</span></div>
+            <p class="cdesc">Create instant privacy and divide small spaces easily with this adjustable floor‑to‑ceiling curtain rod that installs without drilling — ideal for studios and shared rooms.</p>
+            <ul class="cfeat">
+              <li>Best for: Apartments, studios, dorms, and small studios</li>
+              <li>No‑drill, tension‑style installation</li>
+              <li>Use for: Room‑divider curtains or privacy screens</li>
+            </ul>
+            <div class="cfoot">
+              <span class="cprice">$40+</span>
+              <a href="https://amzn.to/3PwCJID" class="cbtn" target="_blank" rel="nofollow sponsored">Check Price on Amazon</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- END SMART HOME DECOR -->
+
+    <!-- ═══ PREMIUM RUGS ═══ -->
+    <div class="cat rev" data-cat="rugs">
+      <div class="cat-head">
+        <span class="cat-title">🏡 Premium Rugs</span>
+        <div class="cat-line"></div>
+      </div>
+      <div class="grid">
+
+        <!-- 20: IOHOUZE Abstract Area Rug -->
+        <div class="card rev">
+          <div class="card-imgs">
+            <span class="badge badge-seller">✦ Room Anchor</span>
+            <div class="mwrap">
+              <img class="main-img" src="images/iohouze-abstract-area-rug-8x10-1.jpg" alt="IOHOUZE Abstract Area Rug 8x10" id="main-20" loading="lazy" onerror="this.src='https://m.media-amazon.com/images/I/81M0NUfyKkL._AC_SL1500_.jpg'"/>
+            </div>
+            <div class="thumbs">
+              <img class="thumb active" src="images/iohouze-abstract-area-rug-8x10-1.jpg" data-src="images/iohouze-abstract-area-rug-8x10-1.jpg" onerror="this.src='https://m.media-amazon.com/images/I/81M0NUfyKkL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/iohouze-abstract-area-rug-8x10-2.jpg" data-src="images/iohouze-abstract-area-rug-8x10-2.jpg" onerror="this.src='https://m.media-amazon.com/images/I/91Xu1X3WuBL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/iohouze-abstract-area-rug-8x10-3.jpg" data-src="images/iohouze-abstract-area-rug-8x10-3.jpg" onerror="this.src='https://m.media-amazon.com/images/I/91nI1Q5ZfJL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/iohouze-abstract-area-rug-8x10-4.jpg" data-src="images/iohouze-abstract-area-rug-8x10-4.jpg" onerror="this.src='https://m.media-amazon.com/images/I/81M0NUfyKkL._AC_SL1500_.jpg'"/>
+              <img class="thumb" src="images/iohouze-abstract-area-rug-8x10-5.jpg" data-src="images/iohouze-abstract-area-rug-8x10-5.jpg" onerror="this.src='https://m.media-amazon.com/images/I/81M0NUfyKkL._AC_SL1500_.jpg'"/>
+            </div>
+          </div>
+          <div class="cbody">
+            <h3 class="cname">IOHOUZE Abstract Area Rug (8×10)</h3>
+            <div class="crat"><span class="cstar">★★★★★</span><span class="crev">4.6/5 · 1,900+ reviews</span></div>
+            <p class="cdesc">Upgrade your room with this soft abstract area rug that adds warmth and modern style to living rooms or bedrooms. Washable with a non‑slip backing for safety.</p>
+            <ul class="cfeat">
+              <li>Best for: Living rooms or larger bedrooms</li>
+              <li>Large 8' × 10' size for noticeable impact</li>
+              <li>Washable, non‑slip backing and modern abstract pattern</li>
+            </ul>
+            <div class="cfoot">
+              <span class="cprice">$150+</span>
+              <a href="https://amzn.to/4cfYvck" class="cbtn" target="_blank" rel="nofollow sponsored">Steal This Look</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- END PREMIUM RUGS -->
+
+  </div>
+  </div>
+</section>
+<div class="back-bar">
+  <a href="index.html">
+    <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M12 7H2M7 2L2 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Back to Homepage
+  </a>
+</div>
+
+<footer>
+  <span class="flogo">UCIOR <span>Decor</span></span>
+  <p class="fdisc"><strong>Affiliate Disclosure:</strong> As an Amazon Associate, I earn from qualifying purchases. Prices are approximate starting prices and may vary.</p>
+</footer>
+
+<a href="#" class="float-btn hidden" id="fb">
+  <span class="fpulse"></span>
+  Shop Viral Finds
+  <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a>
+
+<script>
+  // NAV SCROLL
+  const nav = document.getElementById('nav');
+  const fb  = document.getElementById('fb');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    nav.classList.toggle('scrolled', y > 20);
+    const atBottom = y + window.innerHeight >= document.body.offsetHeight - 100;
+    if (fb) fb.classList.toggle('hidden', y < 400 || atBottom);
+  }, {passive:true});
+
+  // ── THUMBNAIL SWAP — FIXED & BULLETPROOF ──
+  document.querySelectorAll('.card').forEach(card => {
+    const mainImg = card.querySelector('.main-img');
+    const thumbs  = card.querySelectorAll('.thumb');
+    if (!mainImg || !thumbs.length) return;
+
+    // Store original src on every thumb before onerror can corrupt it
+    thumbs.forEach(t => {
+      if (!t.dataset.src) t.dataset.src = t.getAttribute('src');
+    });
+
+    thumbs.forEach(thumb => {
+      thumb.addEventListener('click', function() {
+        const newSrc = this.dataset.src || this.getAttribute('src');
+        // Fade transition
+        mainImg.style.opacity = '0';
+        setTimeout(() => {
+          mainImg.src           = newSrc;
+          mainImg.style.opacity = '1';
+        }, 160);
+        // Active state
+        thumbs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  });
+
+  // CATEGORY FILTER
+  function fcat(btn, cat) {
+    document.querySelectorAll('.fchip').forEach(c => c.classList.remove('on'));
+    btn.classList.add('on');
+    document.querySelectorAll('.card').forEach(c => c.style.display = '');
+    document.querySelectorAll('.cat[data-cat]').forEach(s => {
+      s.style.display = (cat === 'all' || s.dataset.cat === cat) ? '' : 'none';
+    });
+  }
+
+  function fbudget(btn, max) {
+    document.querySelectorAll('.fchip').forEach(c => c.classList.remove('on'));
+    btn.classList.add('on');
+    document.querySelectorAll('.cat[data-cat]').forEach(s => s.style.display = '');
+    document.querySelectorAll('.card').forEach(card => {
+      const p = card.querySelector('.cprice');
+      if (!p) return;
+      card.style.display = parseFloat(p.textContent.replace(/[^0-9.]/g,'')) <= max ? '' : 'none';
+    });
+    document.querySelectorAll('.cat[data-cat]').forEach(s => {
+      const vis = [...s.querySelectorAll('.card')].some(c => c.style.display !== 'none');
+      s.style.display = vis ? '' : 'none';
+    });
+  }
+
+  // SCROLL REVEAL
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.06, rootMargin:'0px 0px -20px 0px'});
+  document.querySelectorAll('.rev').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
